@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html ng-app="challenge4App" lang="en">
+  <head>
+    <!-- viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- *optional* bootstrap theme -->
+    <link rel="stylesheet" href="https://bootswatch.com/slate/bootstrap.min.css">
+    <!-- jquery  -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- bootstrap jquery -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- angularjs -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <!-- my js -->
+    <script src="services.js"></script>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="jumbotron">
+
+        <div class="row text-center">
+          <h3>Devin Cargill's Challenge 4</h3><hr>
+        </div>
+
+        <div ng-controller="StudentController as studentList">
+          <div class="row">
+            <!-- student list -->
+            <div class="col-sm-6">
+              <div class="panel panel-default">
+                <div class="panel-heading">Student List</div>
+                <div class="panel-body">
+
+                  <span>{{ studentList.remaining() }} of {{ studentList.students.length }} active </span><br>
+                  <button type="button" ng-click="studentList.archive()" class="btn btn-danger btn-block">Delete Inactive Students</button><br>
+                  <div class="list-group">
+                    <li ng-repeat="student in studentList.students track by $index" class="list-group-item">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <strong>Student Number: </strong><span class="done-{{ student.active }}">{{ student.studentNumber }}</span><br>
+                          <strong>Student Name: </strong><span class="done-{{ student.active }}">{{ student.studentName }}</span><br>
+                          <strong>Student Address: </strong><span class="done-{{ student.active }}">{{ student.studentAddress }}</span><br>
+                          <strong>Phone Number: </strong><span class="done-{{ student.active }}">{{ student.studentPhoneNumber }}</span><br>
+                          <strong>Student GPA: </strong><span class="done-{{ student.active }}">{{ student.studentGPA }}</span><br>
+                          <strong>Academic Plan: </strong><span class="done-{{ student.active }}">{{ student.studentAcademicPlan }}</span><br>
+                          <strong>Student Level: </strong><span class="done-{{ student.active }}">{{ student.studentLevel }}</span>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="checkbox">
+                            <label><input type="checkbox" ng-model="student.active" ng-click="studentList.refresh(this)" value="">Toggle Active</label>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- add student form -->
+            <div class="col-sm-6">
+              <div class="panel panel-default">
+                <div class="panel-heading">Add a Student</div>
+                <div class="panel-body">
+
+                  <form class="form-horizontal" ng-submit="studentList.addStudent()">
+                    <!-- student number -->
+                    <div class="form-group">
+                      <label class="control-label col-sm-2" for="studentNumber">Student Number:</label>
+                      <div class="col-sm-10">
+                        <input type="number" ng-model="studentList.studentNumber" class="form-control" id="studentNumber" placeholder="Enter Student Number">
+                      </div>
+                    </div><br>
+                    <!-- student name -->
+                    <div class="form-group">
+                      <label class="control-label col-sm-2" for="studentName">Student Name:</label>
+                      <div class="col-sm-10">
+                        <input type="text" ng-model="studentList.studentName" class="form-control" id="studentName" placeholder="Enter Student Name">
+                      </div>
+                    </div><br>
+                    <!-- student address -->
+                    <div class="form-group">
+                      <label class="control-label col-sm-2" for="studentAddress">Student Address:</label>
+                      <div class="col-sm-10">
+                        <input type="text" ng-model="studentList.studentAddress" class="form-control" id="studentAddress" placeholder="Enter Student Address">
+                      </div>
+                    </div><br>
+                    <!-- student phone number -->
+                    <div class="form-group">
+                      <label class="control-label col-sm-2" for="studentPhoneNumber">Student Phone Number:</label>
+                      <div class="col-sm-10">
+                        <input type="number" ng-model="studentList.studentPhoneNumber" class="form-control" id="studentPhoneNumber" placeholder="Enter Student Phone Number">
+                      </div>
+                    </div><br>
+                    <!-- student GPA -->
+                    <div class="form-group">
+                      <label class="control-label col-sm-2" for="studentGPA">Student GPA:</label>
+                      <div class="col-sm-10">
+                        <input type="number" ng-model="studentList.studentGPA" class="form-control" id="studentGPA" placeholder="Enter Student GPA">
+                      </div>
+                    </div><br>
+                    <!-- academic plan -->
+                    <div class="form-group">
+                      <label class="control-label col-sm-2" for="studentAcademicPlan">Student Academic Plan:</label>
+                      <div class="col-sm-10">
+                        <input type="text" ng-model="studentList.studentAcademicPlan" class="form-control" id="studentAcademicPlan" placeholder="Enter Student Academic Plan (Expected Graduation)">
+                      </div>
+                    </div><br />
+                    <!-- level -->
+                    <div class="form-group">
+                      <label class="control-label col-sm-2" for="studentLevel">Student Level:</label>
+                      <div class="col-sm-10">
+                        <input type="text" ng-model="studentList.studentLevel" class="form-control" id="studentLevel" placeholder="Enter Student Level">
+                      </div>
+                    </div><br>
+                    <input class="btn btn-block btn-primary" type="submit" value="Add Student">
+                  </form>
+
+                </div><!-- panel body -->
+              </div><!-- panel -->
+            </div><!-- col-sm-6 -->
+          </div><!-- row -->
+        </div><!-- end StudentController -->
+
+      </div>
+    </div>
+  </body>
+</html>
